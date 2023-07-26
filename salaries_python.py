@@ -69,7 +69,7 @@ if __name__ == "__main__":
     
     # MODEL
     
-    # Linear regression
+    # Linear regression - Years of Experience and Salary
     lm = LinearRegression()
     x = df[['Years of Experience']]
     y = df[['Salary']]
@@ -83,6 +83,7 @@ if __name__ == "__main__":
     plt.title('Outliers of Years of Experience and Salary')
     plt.show()
     
+    # Linear regression - Age and Salary
     x = df[['Age']]
     y = df[['Salary']]
     lm.fit(x,y)
@@ -94,22 +95,34 @@ if __name__ == "__main__":
     plt.title('Outliers of Age and Salary')
     plt.show()
     
-    
     # Multivariate Regression
+    z = df[['Years of Experience','Age']]
+    y = df[['Salary']]
+    lm.fit(z,y)
+    r_sqm = lm.score(z,y)
+    yhatm = lm.predict(z)
     
+    
+    # CONCLUSIONS
+    # The independent variable explians only 53% (in case of linear regression)
+    # and 66% (in case of multivariate regression) of dependent variable. 
+    # This is because salaries vary significantly depending on the job title.
+    # The correct model should be built separately for every job title,
+    # so more data would be needed. Alternatively, the better regression model 
+    # should be chosen.
     
     
     # BOXPLOT FOR POWERBI DASHBOARD
     
     # Salary by gender
-    # male = create_data_series_for_boxplots('Male')
-    # female = create_data_series_for_boxplots('Female')
-    # other = create_data_series_for_boxplots('Other')
-    # boxplots = pd.concat([male, female, other], axis = 1)
-    # ax = sns.boxplot(boxplots, palette='Blues')
-    # ax.set_title('Salary by gender', fontsize=16)
-    # ax.set_xlabel('Gender', fontsize=12)
-    # ax.set_ylabel('Salary', fontsize=12)
+    male = create_data_series_for_boxplots('Male')
+    female = create_data_series_for_boxplots('Female')
+    other = create_data_series_for_boxplots('Other')
+    boxplots = pd.concat([male, female, other], axis = 1)
+    ax = sns.boxplot(boxplots, palette='Blues')
+    ax.set_title('Salary by gender', fontsize=16)
+    ax.set_xlabel('Gender', fontsize=12)
+    ax.set_ylabel('Salary', fontsize=12)
 
     
     
